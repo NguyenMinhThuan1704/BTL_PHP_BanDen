@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'taikhoan',
         ],
+        'taikhoan' => [
+            'driver' => 'session',
+            'provider' => 'taikhoan',
+        ],
     ],
 
     /*

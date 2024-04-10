@@ -15,7 +15,7 @@ class taikhoan extends Model implements Authenticatable
     use HasFactory;
     protected $table = 'taikhoan';
     protected $fillable = [
-        'id', 'MaLoaiTK', 'TenTaiKhoan', 'password', 'Email', 
+        'id', 'MaLoaiTK', 'TenTaiKhoan', 'password', 'Email', 'MatKhau'
     ];
 
     public function getAllTK(){
@@ -55,13 +55,13 @@ class taikhoan extends Model implements Authenticatable
     }
 
     public function addTK($data){
-        DB::insert('INSERT INTO taikhoan (MaLoaiTK, TenTaiKhoan, password, Email) values(?, ?, ?, ?)',
+        DB::insert('INSERT INTO taikhoan (MaLoaiTK, TenTaiKhoan, password, Email, MatKhau) values(?, ?, ?, ?, ?)',
         $data);
     }
 
     public function updateTK($data, $id) {
         $data[]=$id;
-        return DB::update('UPDATE taikhoan SET MaLoaiTK =?, TenTaiKhoan =?, password =?, Email =? WHERE id =?', 
+        return DB::update('UPDATE taikhoan SET MaLoaiTK =?, TenTaiKhoan =?, password =?, Email =?, MatKhau =? WHERE id =?', 
         $data);
     }
 

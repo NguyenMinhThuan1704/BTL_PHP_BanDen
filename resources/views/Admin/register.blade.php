@@ -99,7 +99,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel 10 Custom Login and Registration - Register Page</title>
+    <title>Login - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </head>
@@ -111,31 +111,52 @@
                     <h1 class="card-title">Register</h1>
                 </div>
                 <div class="card-body">
-                    @if(Session::has('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ Session::get('success') }}
-                        </div>
-                    @endif
+                @if (session('msg'))
+                    <script>
+                        alert("{{ session('msg') }}");
+                    </script>
+                @endif
                     <form action="{{ route('admin.register') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Tài khoản</label>
                             <input type="text" name="TenTaiKhoan" class="form-control" id="TenTaiKhoan" placeholder="Nhập tài khoản của bạn..." required>
                         </div>
+                        @error('TenTaiKhoan')
+                            <span style="color: red;">{{$message}}</span>
+                        @enderror
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="password" required>
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu của bạn..." required>
                         </div>
+                        @error('password')
+                            <span style="color: red;">{{$message}}</span>
+                        @enderror
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
+                            <label for="password" class="form-label">Nhập lại mật khẩu</label>
+                            <input type="password" name="MatKhau" class="form-control" id="password" placeholder="Nhập lại mật khẩu của bạn..." required>
+                        </div>
+                        @error('MatKhau')
+                            <span style="color: red;">{{$message}}</span>
+                        @enderror
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
                             <input type="email" name="Email" class="form-control" id="email" placeholder="Nhập email của bạn..." required>
                         </div>
+                        @error('Email')
+                            <span style="color: red;">{{$message}}</span>
+                        @enderror
                         <div class="mb-3">
                             <div class="d-grid">
                                 <button class="btn btn-primary">Register</button>
                             </div>
                         </div>
                     </form>
+                    <div class="mb-3">
+                        <a href="{{ route('admin.login') }}" class="d-grid">
+                            <button class="btn btn-primary">Login</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

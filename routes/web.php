@@ -78,8 +78,8 @@ Route::group(['middleware' => 'guest'], function () {
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::group(['middleware' => 'auth'], function () {
         // Route::get('/home', [testController::class, 'index']);
-        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/tongquan', [tongquanController::class,'index'])->name('tongquan');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     
         //--------------------------Loại sản phẩm----------------------------------
         Route::get('/lsp', [loaisanphamController::class,'index'])->name('lsp-index');

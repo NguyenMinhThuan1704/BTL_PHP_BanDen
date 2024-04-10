@@ -61,7 +61,7 @@
                                     <label for="txtright">Mã tài khoản:</label>
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
-                                    <input type="text" id="MaTK"
+                                    <input type="text" id="MaTK" value="{{old('id') ?? $tkDetail->id}}"
                                         disabled value="Mã tài khoản tự động sinh!" style="background-color: #cecaca;">
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
@@ -91,8 +91,18 @@
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
                                     <input type="text" id="password" name="password" placeholder="Nhập mật khẩu..."
-                                    value="{{old('password') ?? $tkDetail->password}}">
+                                    value="">
                                     @error('password')
+                                        <span style="color: red;">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Nhập lại mật khẩu:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="MatKhau" name="MatKhau" placeholder="Nhập lại mật khẩu..."
+                                    value="">
+                                    @error('MatKhau')
                                         <span style="color: red;">{{$message}}</span>
                                     @enderror
                                 </div>

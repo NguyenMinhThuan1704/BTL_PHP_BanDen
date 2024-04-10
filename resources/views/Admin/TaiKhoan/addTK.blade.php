@@ -96,6 +96,16 @@
                                     @enderror
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Nhập lại mật khẩu:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="password" name="MatKhau" placeholder="Nhập lại mật khẩu..."
+                                    value="{{old('MatKhau')}}">
+                                    @error('MatKhau')
+                                        <span style="color: red;">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
                                     <label for="txtright">Email:</label>
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">

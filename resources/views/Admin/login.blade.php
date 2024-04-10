@@ -91,10 +91,10 @@
                     <h1 class="card-title">Login</h1>
                 </div>
                 <div class="card-body">
-                    @if(Session::has('error'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ Session::get('error') }}
-                        </div>
+                    @if (session('msg'))
+                        <script>
+                            alert("{{ session('msg') }}");
+                        </script>
                     @endif
                     <form action="{{ route('admin.login') }}" method="POST">
                         @csrf
@@ -104,7 +104,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Mật khẩu:</label>
-                            <input type="password" name="password" class="form-control" id="password" required>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu của bạn..." required>
                         </div>
                         <div class="mb-3">
                             <div class="d-grid">
@@ -112,6 +112,11 @@
                             </div>
                         </div>
                     </form>
+                    <div class="mb-3">
+                        <a href="{{ route('admin.register') }}" class="d-grid">
+                            <button class="btn btn-primary">Register</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

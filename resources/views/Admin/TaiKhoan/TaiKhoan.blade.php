@@ -99,7 +99,7 @@
                                                     <td>{{$item->id}}</td>
                                                     <td>{{$item->cat->TenLoaiTK}}</td>
                                                     <td>{{$item->TenTaiKhoan}}</td>
-                                                    <td>{{$item->password}}</td>
+                                                    <td>{{$item->MatKhau}}</td>
                                                     <td>{{$item->Email}}</td>
                                                     <td>{{$item->created_at}}</td>
                                                     <td>{{$item->updated_at}}</td>

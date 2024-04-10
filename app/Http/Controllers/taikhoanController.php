@@ -30,10 +30,6 @@ class taikhoanController extends Controller
         $MaLoaiTK = '';
         
         $taikhoanList = taikhoan::orderBy('id', 'ASC') -> search() -> paginate(10);
-        // Giải mã mật khẩu từ mỗi dòng dữ liệu
-        // foreach ($taikhoanList as $taikhoan) {
-        //     $taikhoan->decrypted_password = Crypt::decryptString($taikhoan->password);
-        // }
         return view('Admin.TaiKhoan.taikhoan', compact('taikhoanList', 'cats', 'TenTaiKhoan', 'MaLoaiTK'));
     }
 
@@ -68,25 +64,30 @@ class taikhoanController extends Controller
     public function postCreate(Request $request) {
         $request ->validate([
             'MaLoaiTK' => 'required',
-            'TenTaiKhoan' => 'required|min:5|unique:taikhoan',
+            'TenTaiKhoan' => 'required|min:4|unique:taikhoan',
             'password' => 'required|min:5',
-            'Email' => 'required|email',
+            'MatKhau' => 'required|same:password',
+            'Email' => 'required|email|unique:taikhoan',
         ], [
             'MaLoaiTK.required' => 'Loại tài khoản bắt buộc phải chọn',
             'TenTaiKhoan.required' => 'Tên tài khoản bắt buộc phải nhập',
-            'TenTaiKhoan.min' => 'Tên tài khoản phải có ít nhất 5 ký tự',
+            'TenTaiKhoan.min' => 'Tên tài khoản phải có ít nhất 4 ký tự',
             'TenTaiKhoan.unique' => 'Tên tài khoản đã tồn tại trên hệ thống',
             'password.required' => 'Mật khẩu bắt buộc phải nhập',
             'password.min' => 'Mật khẩu phải có ít nhất 5 ký tự',
+            'MatKhau.required' => 'Bắt buộc phải nhập lại mật khẩu',
+            'MatKhau.same' => 'Nhập lại mật khẩu không trùng khớp',
             'Email.required' => 'Email bắt buộc phải nhập',
-            'Email.email' => 'Email không đúng định dạng'
+            'Email.email' => 'Email không đúng định dạng',
+            'Email.unique' => 'Email đã tồn tại trên hệ thống',
         ]);
 
         $dataInsert = [
             $request -> MaLoaiTK,
             $request -> TenTaiKhoan,
-            $request -> password,
+            Hash::make($request->password),
             $request -> Email,
+            $request -> MatKhau,
         ];
 
         $this->taikhoan->addTK($dataInsert);
@@ -121,29 +122,53 @@ class taikhoanController extends Controller
         }
         $request ->validate([
             'MaLoaiTK' => 'required',
-            'TenTaiKhoan' => 'required|min:5',
+            'TenTaiKhoan' => 'required|min:4',
             'password' => 'required|min:5',
             'Email' => 'required|email',
+            'MatKhau' => 'required|same:password',
         ], [
             'MaLoaiTK.required' => 'Loại tài khoản bắt buộc phải chọn',
             'TenTaiKhoan.required' => 'Tên tài khoản bắt buộc phải nhập',
-            'TenTaiKhoan.min' => 'Tên tài khoản phải có ít nhất 5 ký tự',
+            'TenTaiKhoan.min' => 'Tên tài khoản phải có ít nhất 4 ký tự',
             'password.required' => 'Mật khẩu bắt buộc phải nhập',
             'password.min' => 'Mật khẩu phải có ít nhất 5 ký tự',
+            'MatKhau.required' => 'Bắt buộc phải nhập lại mật khẩu',
             'Email.required' => 'Email bắt buộc phải nhập',
-            'Email.email' => 'Email không đúng định dạng'
+            'Email.email' => 'Email không đúng định dạng',
+            'MatKhau.required' => 'Bắt buộc phải nhập lại mật khẩu',
+            'MatKhau.same' => 'Nhập lại mật khẩu không trùng khớp',
         ]);
 
         $dataUpdate = [
             $request -> MaLoaiTK,
             $request -> TenTaiKhoan,
-            $request -> password,
+            Hash::make($request->password),
             $request -> Email,
+            $request -> MatKhau,
         ];
 
         $this->taikhoan->updateTK($dataUpdate, $id);
 
         return redirect()->route('admin.tk-index')->with('msg', 'Cập nhật tài khoản thành công');
+
+        // $hashedPassword = $request->password;
+        // $userInputPassword = $request -> MatKhau;
+        
+        // if (password_verify($userInputPassword, $hashedPassword)) {
+        //     $dataUpdate = [
+        //         $request -> MaLoaiTK,
+        //         $request -> TenTaiKhoan,
+        //         Hash::make($request->password),
+        //         $request -> Email,
+        //         $request -> MatKhau,
+        //     ];
+    
+        //     $this->taikhoan->updateTK($dataUpdate, $id);
+    
+        //     return redirect()->route('admin.tk-index')->with('msg', 'Cập nhật tài khoản thành công');
+        // } else {
+        //     return back()->with('msg', 'Mật khẩu không đúng!');
+        // }
     }
 
     public function delete($id=0) {
