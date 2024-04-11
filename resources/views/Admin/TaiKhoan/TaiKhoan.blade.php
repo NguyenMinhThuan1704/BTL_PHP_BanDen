@@ -7,8 +7,7 @@
     <link rel="icon" href="../img/logoCPT.png">
     <link rel="stylesheet" href="{{ asset('assets/css/style_mainQT.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome-free-6.3.0-web/css/all.min.css') }}">
-    <script src="../assets/js/jquery-3.6.0.min.js"></script>
-    <script src="../assets/js_admin/click.js"></script>
+    <script src="{{ asset('/assets/js/jquery-3.6.0.min.js') }}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://thegioianhsang.vn/application/upload/banner/the-gioi-anh-sang-mot-the-gioi-den-trang-tri-cao-cap.png" rel="icon"/>
     <title>Quản lý cửa hàng bán đèn trang trí</title>
@@ -37,11 +36,10 @@
                 <a href="{{route('admin.kh-index')}}"><button ><i class="fas fa-users"></i> Khách hàng</button></a>
                 <a href="{{route('admin.hdn-index')}}"><button><i class="fas fa-file-import"></i> Hóa đơn nhập</button></a>
                 <a href="{{route('admin.hdb-index')}}"><button><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button></a>
-                                <a href="{{route('admin.tt-index')}}"><button><i class="fas fa-newspaper"></i> Tin tức</button></a>
+                <a href="{{route('admin.tt-index')}}"><button><i class="fas fa-newspaper"></i> Tin tức</button></a>
                 <a href="{{route('admin.dath-index')}}"><button><i class="fa-solid fa-folder-open"></i></i> Dự án thực hiện</button></a>
-
                 <a href="{{route('admin.tk-index')}}"><button class="active"><i class="fas fa-user"></i> Tài khoản</button></a>
-                <a href="{{route('admin.lsp-index')}}"><button><i class="fa-solid fa-chart-column"></i> Thống kê</button></a>
+                <a href="{{route('admin.tke-index')}}"><button><i class="fa-solid fa-chart-column"></i> Thống kê</button></a>
             </div>
             
             <div class="col-10 col-s-12 content">

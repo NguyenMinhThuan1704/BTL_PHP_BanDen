@@ -30,6 +30,7 @@ use App\http\Controllers\khachhangController;
 use App\http\Controllers\tintucController;
 use App\http\Controllers\duanthuchienController;
 use App\http\Controllers\taikhoanController;
+use App\http\Controllers\thongkeController;
 
 
 // ----------------------------USER------------------------------------
@@ -170,6 +171,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 
     // ----------------------------Thống kê------------------------------------
+    Route::get('/tke', [thongkeController::class,'index'])->name('tke-index');
+    Route::post('/searchHDN', [thongkeController::class,'thongkeHDN'])->name('thongkeHDN');
 
 });
 
