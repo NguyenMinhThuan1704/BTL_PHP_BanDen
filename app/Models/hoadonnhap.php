@@ -113,7 +113,7 @@ class hoadonnhap extends Model
 
     public function catTK()
     {
-        return $this->hasOne(taikhoan::class, 'id', 'id');
+        return $this->hasOne(taikhoan::class, 'id', 'MaTaiKhoan');
     }
 
 }

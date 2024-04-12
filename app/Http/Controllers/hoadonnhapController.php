@@ -48,7 +48,7 @@ class hoadonnhapController extends Controller
 
     public function showDetail($MaHoaDonNhap)
     {
-        $title="Chi tiết hóa đơn bán";
+        $title="Chi tiết hóa đơn nhập";
 
         $hoadonnhap = Hoadonnhap::with('catNCC', 'catTK')->findOrFail($MaHoaDonNhap);
 

@@ -37,8 +37,8 @@
                 <a href="{{route('admin.sp-index')}}"><button><i class="fas fa-barcode"></i> Sản phẩm</button></a>
                 <a href="{{route('admin.ncc-index')}}"><button><i class="fas fa-truck"></i> Nhà cung cấp</button></a>
                 <a href="{{route('admin.kh-index')}}"><button ><i class="fas fa-users"></i> Khách hàng</button></a>
-                <a href="{{route('admin.hdn-index')}}"><button><i class="fas fa-file-import"></i> Hóa đơn nhập</button></a>
-                <a href="{{route('admin.hdb-index')}}"><button class="active"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button></a>
+                <a href="{{route('admin.hdn-index')}}"><button class="active"><i class="fas fa-file-import"></i> Hóa đơn nhập</button></a>
+                <a href="{{route('admin.hdb-index')}}"><button ><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button></a>
                 <a href="{{route('admin.tt-index')}}"><button><i class="fas fa-newspaper"></i> Tin tức</button></a>
                 <a href="{{route('admin.dath-index')}}"><button><i class="fa-solid fa-folder-open"></i></i> Dự án thực hiện</button></a>
                 <a href="{{route('admin.tk-index')}}"><button><i class="fas fa-user"></i> Tài khoản</button></a>
@@ -48,7 +48,7 @@
                 <div class="col-12 col-s-12 content">
                     <div class="tabcontent">
                         <div class="title">
-                            <i class="fas fas fa-boxes"></i> {{$title}} {{$hoadonnhap->MaHoaDonnhap}}
+                            <i class="fas fas fa-boxes"></i> {{$title}} {{$hoadonnhap->MaHoaDonNhap}}
                             <hr>
                         </div>
 

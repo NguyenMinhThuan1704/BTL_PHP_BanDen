@@ -94,21 +94,21 @@
                             <div class="row">
                                 <div class="col-12 col-s-12 padding-box">
                                     <select name="id">
-                                        <option value="">--Chọn nhân viên nhập--</option>
+                                        <option value="0">--Chọn nhân viên nhập--</option>
                                         @foreach ($catsTK as $catTK)
                                             <option value="{{$catTK->id}}"
                                             {{ $id == $catTK->id ? 'selected' : '' }}
-                                            >{{ $catTK->TenTaiKhoan }}</option>
+                                            >{{ $catTK->id }} - {{ $catTK->TenTaiKhoan }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
                                     <select name="MaNhaPhanPhoi">
-                                        <option value="">--Chọn nhà phân phối--</option>
+                                        <option value="0">--Chọn nhà phân phối--</option>
                                         @foreach ($catsNCC as $catNCC)
                                             <option value="{{$catNCC->MaNhaPhanPhoi}}"
                                             {{ $MaNhaPhanPhoi == $catNCC->MaNhaPhanPhoi ? 'selected' : '' }}
-                                            >{{ $catNCC->TenNhaPhanPhoi }}</option>
+                                            >{{ $catNCC->MaNhaPhanPhoi }} - {{ $catNCC->TenNhaPhanPhoi }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -116,14 +116,16 @@
                                     <label for="txtright">Từ ngày:</label>
                                 </div>
                                 <div class="col-11 col-s-12 padding-box">
-                                    <input name ="tuNgay" type="datetime-local" id="search-export-fr-hdn">
+                                    <input name="tuNgay" type="date" id="search-export-fr-hdn" value="{{ $tuNgay ?? session('tuNgay') }}">
                                 </div>
                                 <div class="col-1 col-s-12 padding-box">
                                     <label for="txtright">Đến ngày:</label>
                                 </div>
                                 <div class="col-11 col-s-12 padding-box">
-                                    <input name="denNgay" type="datetime-local" id="search-export-to-hdn">
+                                    <input name="denNgay" type="date" id="search-export-to-hdn" value="{{ $denNgay ?? session('denNgay') }}">
                                 </div>
+
+
                                 <div class="col-4 col-s-12 padding-box" style="float: right;">
                                     <button type="submit"><i class="fas fas fa-search"></i> Tìm kiếm</button>
                                 </div>
@@ -151,7 +153,7 @@
                                                     <td>{{$item->TenSanPham}}</td>
                                                     <td>{{$item->SoLuongCTHDN}}</td>
                                                     <td>{{$item->created_at}}</td>
-                                                    <td>{{$item->TongTienCTHDN}}</td>
+                                                    <td>{{ number_format($item->TongTienCTHDN, 0, ',', '.') }}</td>
                                                 </tr>
                                             @endforeach
                                         @else
@@ -163,13 +165,13 @@
                                 </table>
                             </div>
                             <div class="col-12 col-s-12 padding-box">
-                                Số lượng bản ghi: <span>{{ $soPhanTu }}</span>
+                                Số lượng bản ghi: <span>{!! $soPhanTu !!}</span>
                             </div>
                             <div class="col-12 col-s-12 padding-box">
-                                Số lượng sản phẩm đã nhập: <span>{{ $soLuongTong }}</span>
+                                Số lượng sản phẩm đã nhập: <span>{!! $soLuongTong !!}</span>
                             </div>
                             <div class="col-12 col-s-12 padding-box">
-                                Tổng tiền: <span>{{ number_format($tongTienTong, 0, ',', '.') }} đ</span>
+                                Tổng tiền: <span>{!! number_format($tongTienTong, 0, ',', '.') !!} đ</span>
                             </div>
                             <div class="col-12 col-s-12 padding-box">
                                 <div class="box-sum">
@@ -312,5 +314,10 @@
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+    document.addEventListener("DOMContentLoaded", function() {
+        // Gọi hàm openTab và truyền vào id của tab 1
+        openTab(event, 'Tab1');
+        // Lưu ý: Cần phải có tham số event khi gọi hàm openTab
+    });
 </script>
 </html>
