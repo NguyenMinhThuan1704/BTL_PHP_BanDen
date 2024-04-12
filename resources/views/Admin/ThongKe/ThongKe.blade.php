@@ -91,7 +91,7 @@
                         </div>
                         <form action="{{ route('admin.thongkeHDN') }}" method="POST" style="display: flex;">
                         @csrf
-                            <div class="row">
+                            <div class="row" style="width: 100%; margin-right: 0; margin-left: 0;">
                                 <div class="col-12 col-s-12 padding-box">
                                     <select name="id">
                                         <option value="0">--Chọn nhân viên nhập--</option>
@@ -124,10 +124,8 @@
                                 <div class="col-11 col-s-12 padding-box">
                                     <input name="denNgay" type="date" id="search-export-to-hdn" value="{{ $denNgay ?? session('denNgay') }}">
                                 </div>
-
-
                                 <div class="col-4 col-s-12 padding-box" style="float: right;">
-                                    <button type="submit"><i class="fas fas fa-search"></i> Tìm kiếm</button>
+                                    <button type="submit" onclick="openTab(event, 'Tab1')"><i class="fas fas fa-search"></i> Tìm kiếm</button>
                                 </div>
                             </div>
                         </form>
@@ -180,7 +178,7 @@
                                     </div>
                                     <div class="col-4 col-s-12" style="float: left;">
                                         <button id="inhoadonnhap">
-                                            <a href="./InThongKeHDN.html" style="color: #fff; text-decoration: none;">In thống kê hóa đơn nhập</a>
+                                            <a href="" style="color: #fff; text-decoration: none;">In thống kê hóa đơn nhập</a>
                                         </button>
                                     </div>
                                 </div>
@@ -196,34 +194,37 @@
                             <i class="fa-solid fa-chart-column"></i> Thống kê hóa đơn bán
                             <hr>
                         </div>
-                        <div class="row">
-                            <div class="col-2 col-s-12 padding-box">
-                                <label for="txtright">Tên khách hàng:</label>
+                        <form action="{{ route('admin.thongkeHDB') }}" method="POST" style="display: flex;">
+                        @csrf
+                            <div class="row" style="width: 100%; margin-right: 0; margin-left: 0;">
+                                <div class="col-2 col-s-12 padding-box">
+                                    <label for="txtright">Tên khách hàng:</label>
+                                </div>
+                                <div class="col-10 col-s-12 padding-box">
+                                    <input type="text" name="TenKH" value="{{ $TenKH ?? session('TenKH') }}" placeholder="Nhập tên khách hàng...">
+                                </div>
+                                <div class="col-1 col-s-12 padding-box">
+                                    <label for="txtright">Từ ngày:</label>
+                                </div>
+                                <div class="col-11 col-s-12 padding-box">
+                                    <input name="tuNgayHDB" type="date" value="{{ $tuNgayHDB ?? session('tuNgayHDB') }}">
+                                </div>
+                                <div class="col-1 col-s-12 padding-box">
+                                    <label for="txtright">Đến ngày:</label>
+                                </div>
+                                <div class="col-11 col-s-12 padding-box">
+                                    <input name="denNgayHDB" type="date" value="{{ $denNgayHDB ?? session('denNgayHDB') }}">
+                                </div>
+                                <div class="col-4 col-s-12 padding-box">
+                                    <button type="submit" onclick="openTab(event, 'Tab2')"><i class="fas fas fa-search"></i> Tìm kiếm</button>
+                                </div>
                             </div>
-                            <div class="col-10 col-s-12 padding-box">
-                                <input type="text" id="search-customer" ng-model="tenkh" placeholder="Nhập tên khách hàng...">
-                            </div>
-                            <div class="col-1 col-s-12 padding-box">
-                                <label for="txtright">Từ ngày:</label>
-                            </div>
-                            <div class="col-11 col-s-12 padding-box">
-                                <input type="datetime-local" id="search-export-fr-hdb">
-                            </div>
-                            <div class="col-1 col-s-12 padding-box">
-                                <label for="txtright">Đến ngày:</label>
-                            </div>
-                            <div class="col-11 col-s-12 padding-box">
-                                <input type="datetime-local" id="search-export-to-hdb">
-                            </div>
-                            <div class="col-4 col-s-12 padding-box" style="float: right;">
-                                <button id="btnSearch2"><i class="fas fas fa-search"></i> Tìm kiếm</button>
-                            </div>
-                        </div>
+                        </form>
                         <div class="row">
                             <div class="col-12 col-s-12 padding-box">
                                 <table class="myTable">
                                     <thead>
-                                        <tr>
+                                        <tr style="text-align: center;">
                                             <th>Tên khách hàng</th>
                                             <th>Địa chỉ</th>
                                             <th>Tên sản phẩm</th>
@@ -233,56 +234,43 @@
                                         </tr>
                                     </thead>
                                     <tbody> 
-                                        <tr ng-repeat="hdb in listHDB">
-                                            <td>Nguyễn Văn A</td>
-                                            <td>HN</td>
-                                            <td>Đèn chùm 1</td>
-                                            <td>100</td>
-                                            <td>01/10/2023</td>
-                                            <td>150.000.000đ</td>
-                                        
-                                        </tr>
-                                    </tbody>
-                                    <tbody> 
-                                        <tr ng-repeat="hdb in listHDB">
-                                            <td>Nguyễn Văn B</td>
-                                            <td>HN</td>
-                                            <td>Đèn chùm 2</td>
-                                            <td>100</td>
-                                            <td>05/10/2023</td>
-                                            <td>150.000.000đ</td>
-                                        
-                                        </tr>
+                                        @if (!empty($ThongKeHDBPaginated))
+                                            @foreach ($ThongKeHDBPaginated as $item)
+                                                <tr style="text-align: center;">
+                                                    <td>{{$item->TenKH}}</td>
+                                                    <td>{{$item->DiaChi}}</td>
+                                                    <td>{{$item->TenSanPham}}</td>
+                                                    <td>{{$item->SoLuongCTHDB}}</td>
+                                                    <td>{{$item->created_at}}</td>
+                                                    <td>{{ number_format($item->TongGia, 0, ',', '.') }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan = "6">Không có dữ liệu</td>
+                                            </tr>
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
                             <div class="col-12 col-s-12 padding-box">
-                                Số lượng bản ghi: <span >2</span>
+                                Số lượng bản ghi: <span>{!! $soPhanTuHDB !!}</span>
                             </div>
                             <div class="col-12 col-s-12 padding-box">
-                                Số lượng sản phẩm đã bán: <span >200</span>
+                                Số lượng sản phẩm đã nhập: <span>{!! $soLuongTongHDB !!}</span>
                             </div>
                             <div class="col-12 col-s-12 padding-box">
-                                Tổng tiền: <span >300.000.000đ</span>
+                                Tổng tiền: <span>{!! number_format($tongTienTongHDB, 0, ',', '.') !!} đ</span>
                             </div>
                             <div class="col-12 col-s-12 padding-box">
                                 <div class="box-sum">
                                     <div class="box-right">
-                                        <button><i class="fas fa-angle-left"></i></button>
-                                        <button ng-click="changePage(1)">1</button>
-                                        <button ng-click="changePage(2)">2</button>
-                                        <button ng-click="changePage(3)">3</button>
-                                        <button ng-click="changePage(4)">4</button>
-                                        <button ng-click="changePage(5)">5</button>
-                                        <button ng-click="changePage(6)">6</button>
-                                        <button ng-click="changePage(7)">7</button>
-                                        <button ng-click="changePage(8)">8</button>
-                                        <button ng-click="changePage(9)">9</button>
-                                        <button ng-click="changePage(10)">10</button>
-                                        <button><i class="fas fa-angle-right"></i></button>
+                                        {{$ThongKeHDBPaginated->links()}}
                                     </div>
                                     <div class="col-4 col-s-12" style="float: left;">
-                                        <button id="inhoadonban"><a href="./InThongKeHDB.html" style="color: #fff; text-decoration: none;">In thống kê hóa đơn bán</a></button>
+                                        <button id="inhoadonban">
+                                            <a href="" style="color: #fff; text-decoration: none;">In thống kê hóa đơn bán</a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -319,5 +307,24 @@
         openTab(event, 'Tab1');
         // Lưu ý: Cần phải có tham số event khi gọi hàm openTab
     });
+
+    function openTabByForm(tabName) {
+        // Ẩn tất cả các nội dung tab
+        var tabcontent = document.getElementsByClassName("tabcontent");
+        for (var i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Xóa hiệu ứng active cho tất cả các nút tab
+        var tablinks = document.getElementsByClassName("tablinks");
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Hiển thị nội dung tab được chỉ định và thêm hiệu ứng active cho nút tab
+        document.getElementById(tabName).style.display = "block";
+        var currentTabButton = document.querySelector("[onclick='openTab(event, \"" + tabName + "\")']");
+        currentTabButton.className += " active";
+    }
 </script>
 </html>

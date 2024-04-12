@@ -14,6 +14,10 @@ class thongke extends Model
     {
         return DB::select('CALL sp_hoadonnhap_thong_ke(?, ?, ?, ?)', [$id, $MaNhaPhanPhoi, $tuNgay, $denNgay]);
     }
+    public static function thongKeHoaDonBan($TenKH, $tuNgayHDB, $denNgayHDB)
+    {
+        return DB::select('CALL sp_hoadonban_thong_ke(?, ?, ?)', [$TenKH, $tuNgayHDB, $denNgayHDB]);
+    }
     public function catNCC()
     {
         return $this->hasOne(nhacungcap::class, 'MaNhaPhanPhoi', 'MaNhaPhanPhoi');

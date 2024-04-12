@@ -90,7 +90,6 @@
                                 <option value="tuan">Theo tuần</option>
                                 <option value="thang">Theo tháng</option>
                                 <option value="nam">Theo năm</option>
-                              
                             </select>
                         </div>
                         <div class="col-12 col-s-12 col-m-12 sales">

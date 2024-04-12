@@ -172,7 +172,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     // ----------------------------Thống kê------------------------------------
     Route::get('/tke', [thongkeController::class,'index'])->name('tke-index');
-    Route::match(['get', 'post'], '/tke/searchHDN', [thongkeController::class,'thongkeHDN'])->name('thongkeHDN');
+    Route::match(['get', 'post'], '/tke/searchHDN', [thongkeController::class,'thongke'])->name('thongkeHDN');
+    Route::match(['get', 'post'], '/tke/searchHDB', [thongkeController::class,'thongke'])->name('thongkeHDB');
 
 });
 
