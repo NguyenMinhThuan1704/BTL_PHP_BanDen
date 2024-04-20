@@ -54,7 +54,7 @@
                             </a>
                         </div>
                     <div class="user">
-                        <a href="{{ route('admin.logout') }}" class="user-link">
+                        <a href="{{ route('user.login') }}" class="user-link">
                             <i class="fa-solid fa-user user-logo"></i>
                         </a>
                     </div>
@@ -197,20 +197,20 @@
                                 <div class="matkhau">
                                     <p>Mật khẩu:</p>
                                     <div style="border-bottom: 1px solid #949494;" class="matkhau_wrap">
-                                        <input type="password" name="MatKhau" class="matkhau_pass" placeholder="Vui lòng nhập mật khẩu của bạn">
+                                        <input type="password" name="password" class="matkhau_pass" placeholder="Vui lòng nhập mật khẩu của bạn">
                                         <i class="icon_eye fa-regular fa-eye"></i>
                                     </div>
-                                    @error('MatKhau')
+                                    @error('password')
                                         <span style="color: red;">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div class="matkhau">
                                     <p>Nhập lại mật khẩu:</p>
                                     <div style="border-bottom: 1px solid #949494;" class="matkhau_wrap">
-                                        <input type="password" name="confirm_MatKhau" class="matkhau_pass" placeholder="Vui lòng nhập lại mật khẩu của bạn">
+                                        <input type="password" name="MatKhau" class="matkhau_pass" placeholder="Vui lòng nhập lại mật khẩu của bạn">
                                         <i class="icon_eye fa-regular fa-eye"></i>
                                     </div>
-                                    @error('confirm_MatKhau')
+                                    @error('MatKhau')
                                         <span style="color: red;">{{$message}}</span>
                                     @enderror
                                 </div>

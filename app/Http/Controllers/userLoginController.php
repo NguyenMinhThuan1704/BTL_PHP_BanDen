@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class userLoginController extends Controller
 {
     public function login() {
+        session(['user_id' =>  null]);
         return view('user.login');
     }
 
@@ -21,11 +22,13 @@ class userLoginController extends Controller
         
         $user = userLogin::where('TenTaiKhoan', $username)->where('MatKhau', $password)->first();
 
+        session(['user_id' =>  $user->id]);
+
+        // dd(session('user_id'), $user);
+
         if ($user) {
-            if ($user->MaLoaiTK == 1 || $user->MaLoaiTK == 2) {
-                return redirect()->route('admin.tongquan')->with('msg', 'Chào mừng bạn đến với trang admin');
-            } elseif ($user->MaLoaiTK == 3) {
-                return redirect()->route('user.index')->with('msg', 'Chào mừng bạn đến với trang người dùng');
+            if ($user->MaLoaiTK == 3) {
+                return redirect()->route('user.index')->with('msg', 'Chào mừng bạn đến với website bán đèn trang trí');
             }
         }
 
@@ -36,18 +39,18 @@ class userLoginController extends Controller
         $request->validate([
             'MaLoaiTK' => 'required',
             'TenTaiKhoan' => 'required|min:5|unique:taikhoan',
-            'MatKhau' => 'required|min:5',
-            'confirm_MatKhau' => 'required|same:MatKhau',
+            'password' => 'required|min:5',
+            'MatKhau' => 'required|same:password',
             'Email' => 'required|email|unique:taikhoan',
         ], [
             'MaLoaiTK.required' => 'Loại tài khoản bắt buộc phải chọn',
             'TenTaiKhoan.required' => 'Tên tài khoản bắt buộc phải nhập',
             'TenTaiKhoan.min' => 'Tên tài khoản phải có ít nhất 5 ký tự',
             'TenTaiKhoan.unique' => 'Tên tài khoản đã tồn tại trên hệ thống',
-            'MatKhau.required' => 'Mật khẩu bắt buộc phải nhập',
-            'MatKhau.min' => 'Mật khẩu phải có ít nhất 5 ký tự',
-            'confirm_MatKhau.required' => 'Bắt buộc phải nhập lại mật khẩu',
-            'confirm_MatKhau.same' => 'Nhập lại mật khẩu không trùng khớp',
+            'password.required' => 'Mật khẩu bắt buộc phải nhập',
+            'password.min' => 'Mật khẩu phải có ít nhất 5 ký tự',
+            'MatKhau.required' => 'Bắt buộc phải nhập lại mật khẩu',
+            'MatKhau.same' => 'Nhập lại mật khẩu không trùng khớp',
             'Email.required' => 'Email bắt buộc phải nhập',
             'Email.email' => 'Email không đúng định dạng',
             'Email.unique' => 'Email đã tồn tại trên hệ thống',
@@ -56,7 +59,7 @@ class userLoginController extends Controller
         $dataInsert = [
             'MaLoaiTK' => $request->MaLoaiTK,
             'TenTaiKhoan' => $request->TenTaiKhoan,
-            // 'MatKhau' => Hash::make($request->MatKhau),
+            'password' => Hash::make($request->password),
             'MatKhau' => $request->MatKhau,
             'Email' => $request->Email,
         ];

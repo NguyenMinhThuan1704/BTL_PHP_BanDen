@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\userGioHang;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class userGioHangController extends Controller
 {

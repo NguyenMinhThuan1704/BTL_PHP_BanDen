@@ -59,7 +59,7 @@
                             </a>
                         </div>
                     <div class="user">
-                        <a href="{{ route('admin.logout') }}" class="user-link">
+                        <a href="{{ route('user.login') }}" class="user-link">
                             <i class="fa-solid fa-user user-logo"></i>
                         </a>
                     </div>

@@ -50,7 +50,7 @@ Route::prefix('user')->name('user.')->group(function(){
     Route::get('/giohang/update/{MaSanPham}', [userGioHangController::class,'updateCart'])->name('update');
     Route::get('/giohang/delete/{MaSanPham}', [userGioHangController::class,'deleteCart'])->name('delete');
     Route::get('/giohang/clear', [userGioHangController::class,'clearCart'])->name('clear');
-    Route::post('/order', [hoaDonController::class, 'postCreate'])->name('order');
+    Route::match(['get', 'post'], '/order', [hoaDonController::class, 'postCreate'])->name('order');
     Route::get('/loginUser', [userLoginController::class,'login'])->name('login');
     Route::post('/loginUser', [userLoginController::class, 'processLogin'])->name('processLogin');
     Route::post('/registerUser', [userLoginController::class, 'register'])->name('register');
