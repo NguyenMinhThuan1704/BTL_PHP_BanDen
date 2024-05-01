@@ -148,7 +148,7 @@ class sanphamController extends Controller
             'GiaGiam' => 'required|numeric',
             'SoLuong' => 'required|numeric'
         ], [
-            'MaLoaiSanPham.required' => 'Mã loại sản phẩm bắt buộc phải nhập',
+            'MaLoaiSanPham.required' => 'Mã loại sản phẩm bắt buộc phải chọn',
             'TenSanPham.required' => 'Tên sản phẩm bắt buộc phải nhập',
             'TenSanPham.min' => 'Tên sản phẩm phải có ít nhất 5 ký tự',
             'AnhDaiDien.required' => 'Tên sản phẩm bắt buộc phải nhập',

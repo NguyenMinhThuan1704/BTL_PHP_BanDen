@@ -65,6 +65,17 @@
                                         disabled value="Mã khách hàng tự động sinh!" style="background-color: #cecaca;">
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Loại sản phẩm:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <select name="id" id="TenTaiKhoan">
+                                        <option value="">--Chọn loại sản phẩm--</option>
+                                        @foreach ($cats_tk as $cat)
+                                            <option value="{{$cat->id}}" {{ (old('id') ?? $khDetail->id) == $cat->id ? 'selected' : '' }}>{{$cat->id}} - {{$cat->TenTaiKhoan}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
                                     <label for="txtright">Tên khách hàng:</label>
                                 </div>
                                 <div class="col-12 col-s-12 padding-box">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\khachhang;
+use App\Models\taikhoan;
 use Illuminate\Http\Request;
 
 class khachhangController extends Controller
@@ -35,16 +36,20 @@ class khachhangController extends Controller
     {
         $title="Thêm khách hàng";
 
-        return view('Admin.KhachHang.addKH', compact('title'));
+        $cats_tk = taikhoan::orderBy('id', 'ASC')->select('id', 'TenTaiKhoan')->get();
+
+        return view('Admin.KhachHang.addKH', compact('title', 'cats_tk'));
     }
 
     public function postCreate(Request $request) {
         $request ->validate([
+            'id' => 'required',
             'TenKH' => 'required|min:5|unique:khachhang',
             'DiaChi' => 'required|min:5',
             'SDT' => 'required|numeric|digits:10',
             'Email' => 'required|email',
         ], [
+            'id.required' => 'Tài khoản bắt buộc phải chọn',
             'TenKH.required' => 'Tên khách hàng bắt buộc phải nhập',
             'TenKH.min' => 'Tên khách hàng phải có ít nhất 5 ký tự',
             'TenKH.unique' => 'Tên khách hàng đã tồn tại trên hệ thống',
@@ -58,6 +63,7 @@ class khachhangController extends Controller
         ]);
 
         $dataInsert = [
+            $request -> id,
             $request -> TenKH,
             $request -> DiaChi,
             $request -> SDT,
@@ -71,6 +77,8 @@ class khachhangController extends Controller
 
     public function getEdit(Request $request ,$MaKH=0) {
         $title="Cập nhật khách hàng";
+
+        $cats_tk = taikhoan::orderBy('id', 'ASC')->select('id', 'TenTaiKhoan')->get();
         
         if(!empty($MaKH)){
             $khDetail = $this->khachhang->getDetail($MaKH);
@@ -85,7 +93,7 @@ class khachhangController extends Controller
             return redirect()->route('admin.kh-index')->with('msg', 'Liên kết không tồn tại');
         }
 
-        return view('Admin.KhachHang.editKH', compact('title', 'khDetail'));
+        return view('Admin.KhachHang.editKH', compact('title', 'khDetail', 'cats_tk'));
     }
 
     public function postEdit(Request $request, $MaKH=0) {
@@ -94,11 +102,13 @@ class khachhangController extends Controller
             return back()->with('msg', 'Liên kết không tồn tại');
         }
         $request ->validate([
+            'id' => 'required',
             'TenKH' => 'required|min:5|',
             'DiaChi' => 'required|min:5',
             'SDT' => 'required|numeric|digits:10',
             'Email' => 'required|email',
         ], [
+            'id.required' => 'Tài khoản bắt buộc phải chọn',
             'TenKH.required' => 'Tên khách hàng bắt buộc phải nhập',
             'TenKH.min' => 'Tên khách hàng phải có ít nhất 5 ký tự',
             'DiaChi.required' => 'Địa chỉ khách hàng bắt buộc phải nhập',
@@ -111,6 +121,7 @@ class khachhangController extends Controller
         ]);
 
         $dataUpdate = [
+            $request -> id,
             $request -> TenKH,
             $request -> DiaChi,
             $request -> SDT,

@@ -904,7 +904,7 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
 
         <div class="footer">
             <div class="grid wide row">
@@ -991,7 +991,6 @@
         </div>
     </div>
 
-    <!-- <script src="./assets/js/main.js" ></script> -->
 </body>
 <script>
     //-------------- slide----------------------

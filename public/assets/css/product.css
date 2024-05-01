@@ -412,13 +412,6 @@ input:focus {
     text-transform: capitalize;
 }
 
-.divauthor {
-    width: 100%;
-    display: inline-block;
-    margin-bottom: 15px;
-    font-size: 16px;
-}
-
 .other-price {
     background-color: #f1f1f1;
     padding: 12px;

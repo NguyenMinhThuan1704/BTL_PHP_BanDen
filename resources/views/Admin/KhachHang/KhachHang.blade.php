@@ -89,6 +89,7 @@
                                     <thead>
                                         <tr style="text-align: center;">
                                             <th>Mã khách hàng</th>
+                                            <th>Mã tài khoản</th>
                                             <th>Tên khách hàng</th>
                                             <th>Địa chỉ</th>
                                             <th>Số điện thoại</th>
@@ -102,14 +103,15 @@
                                         @if (!empty($khachhangList))
                                             @foreach ($khachhangList as $item)
                                                 <tr style="text-align: center;">
-                                                    <td style="text-align: center;">{{$item->MaKH}}</td>
+                                                    <td>{{$item->MaKH}}</td>
+                                                    <td>{{$item->id}}</td>
                                                     <td>{{$item->TenKH}}</td>
                                                     <td>{{$item->DiaChi}}</td>
                                                     <td>{{$item->SDT}}</td>
                                                     <td>{{$item->Email}}</td>
                                                     <td>{{$item->created_at}}</td>
                                                     <td>{{$item->updated_at}}</td>
-                                                    <td style="text-align: center;">
+                                                    <td>
                                                         <a href="{{route('admin.kh-edit', ['MaKH'=>$item->MaKH])}}">
                                                             <i class="fas fa-edit" title="Sửa"></i>
                                                         </a>

@@ -39,7 +39,7 @@ class khachhang extends Model
     }
 
     public function addKH($data){
-        DB::insert('INSERT INTO khachhang (TenKH, DiaChi, SDT, Email) values(?, ?, ?, ?)', 
+        DB::insert('INSERT INTO khachhang (id, TenKH, DiaChi, SDT, Email) values(?, ?, ?, ?, ?)', 
         $data);
     }
 
@@ -49,7 +49,7 @@ class khachhang extends Model
 
     public function updateKH($data, $MaKH) {
         $data[]=$MaKH;
-        return DB::update('UPDATE khachhang SET TenKH =?, DiaChi=?, SDT=?, Email=? WHERE MaKH =?', 
+        return DB::update('UPDATE khachhang SET id=?, TenKH =?, DiaChi=?, SDT=?, Email=? WHERE MaKH =?', 
         $data);
     }
 
